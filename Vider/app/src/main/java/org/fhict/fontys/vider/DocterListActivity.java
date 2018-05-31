@@ -3,6 +3,8 @@ package org.fhict.fontys.vider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+
 import org.fhict.fontys.vider.Models.User;
 
 import java.util.List;
