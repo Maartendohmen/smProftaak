@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Vider</string>
+    <string name="login_failed">Helaas, het is niet gelukt om in te loggen!</string>
 </resources>
