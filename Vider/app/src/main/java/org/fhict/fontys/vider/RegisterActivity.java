@@ -1,5 +1,6 @@
 package org.fhict.fontys.vider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.fhict.fontys.vider.Models.Role;
 import org.fhict.fontys.vider.Models.User;
@@ -56,6 +59,9 @@ public class RegisterActivity extends AppCompatActivity {
         String email = txtEmail.getText().toString();
         String password = md5(txtPassword.getText().toString());
         String confirm = md5(txtConfirm.getText().toString());
+        String name = txtName.getText().toString();
+
+        Intent intent = new Intent(this,MainActivity.class);
 
         if(password.equals(confirm)){
             mAuth.createUserWithEmailAndPassword(email,password)
@@ -64,7 +70,9 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 System.out.println("TAG create user : succes");
-                                userToDatabase(email,mAuth.getCurrentUser().getUid());
+                                userToDatabase(email,mAuth.getCurrentUser().getUid(),name);
+                                Toast.makeText(getBaseContext(),"Aanmelden is gelukt je kunt nu inloggen",Toast.LENGTH_LONG).show();
+                                startActivity(intent);
                             }
                             else{
                                 System.out.println("TAG create user : failed");
@@ -80,8 +88,10 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void userToDatabase(String email, String uid){
-        User user = new User(uid,email, Role.PATIENT);
+    private void userToDatabase(String email, String uid, String name){
+        User user = new User(uid,name, Role.PATIENT,email);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("User").child(user.getUid()).setValue(user);
     }
 
     public static String md5(String s) {

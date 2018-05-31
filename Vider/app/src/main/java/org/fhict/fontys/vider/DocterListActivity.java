@@ -2,18 +2,14 @@ package org.fhict.fontys.vider;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.fhict.fontys.vider.Models.User;
-
-import java.util.List;
 
 public class DocterListActivity extends AppCompatActivity {
     private FirebaseListAdapter<User> doctersAdaper;
@@ -43,7 +39,7 @@ public class DocterListActivity extends AppCompatActivity {
                 TextView woonplaats = (TextView)v.findViewById(R.id.user_woonplaats);
 
                 // Set the parameters
-                username.setText(user.getUserName());
+                username.setText(user.getName());
                 woonplaats.setText(user.getWoonplaats());
             }
         };
