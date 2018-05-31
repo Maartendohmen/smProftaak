@@ -7,12 +7,13 @@
     tools:context="org.fhict.fontys.vider.MainActivity">
 <!--    android:background="@drawable/gradient">-->
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="218dp"
-        android:text="Button" />
+        android:background="@drawable/gradient">
+
+
+    </android.support.v7.widget.Toolbar>
+
 </RelativeLayout>
