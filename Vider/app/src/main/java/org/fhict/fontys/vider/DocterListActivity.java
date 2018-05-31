@@ -24,33 +24,30 @@ public class DocterListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_docter_list);
         doctersList = findViewById(R.id.DoctersListView);
+        getAllDocters();
+
     }
 
     private void getAllDocters(){
-//        //The error said the constructor expected FirebaseListOptions - here you create them:
-//        FirebaseListOptions<User> options = new FirebaseListOptions.Builder<User>()
+        //The error said the constructor expected FirebaseListOptions - here you create them:
+        FirebaseListOptions<User> options = new FirebaseListOptions.Builder<User>()
 //                .setQuery(FirebaseDatabase.getInstance().getReference().child("Messages"), ChatMessage.class)
-//                .setLayout(R.layout.message)
-//                .build();
-//
-//        doctersAdaper = new FirebaseListAdapter<User>(options) {
-//            @Override
-//            protected void populateView(View v, User model, int position) {
-//                // Get references to the views of message.xml
-//                TextView messageText = (TextView)v.findViewById(R.id.message_text);
-//                TextView messageUser = (TextView)v.findViewById(R.id.message_user);
-//                TextView messageTime = (TextView)v.findViewById(R.id.message_time);
-//
-//                // Set their text
-//                messageText.setText(model.getMessageText());
-//                messageUser.setText(model.getMessageUser());
-//
-//                // Format the date before showing it
-//                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-//                        model.getMessageTime()));
-//            }
-//        };
-//        doctersList.setAdapter(doctersAdaper);
-//        doctersAdaper.startListening();
+                .setLayout(R.layout.user)
+                .build();
+
+        doctersAdaper = new FirebaseListAdapter<User>(options) {
+            @Override
+            protected void populateView(View v, User user, int position) {
+                // Get references to the views of message.xml
+                TextView username = (TextView)v.findViewById(R.id.user_username);
+                TextView woonplaats = (TextView)v.findViewById(R.id.user_woonplaats);
+
+                // Set the parameters
+                username.setText(user.getUserName());
+                woonplaats.setText(user.getWoonplaats());
+            }
+        };
+        doctersList.setAdapter(doctersAdaper);
+        doctersAdaper.startListening();
     }
 }
