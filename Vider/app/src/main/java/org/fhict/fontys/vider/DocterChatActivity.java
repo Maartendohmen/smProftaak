@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.fhict.fontys.vider.Models.ChatMessage;
 
 public class DocterChatActivity extends AppCompatActivity {
