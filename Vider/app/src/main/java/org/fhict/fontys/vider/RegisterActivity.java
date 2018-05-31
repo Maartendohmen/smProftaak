@@ -15,6 +15,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.fhict.fontys.vider.Models.Role;
+import org.fhict.fontys.vider.Models.User;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -50,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void register(){
 
-        String email = md5(txtEmail.getText().toString());
+        String email = txtEmail.getText().toString();
         String password = md5(txtPassword.getText().toString());
         String confirm = md5(txtConfirm.getText().toString());
 
@@ -61,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 System.out.println("TAG create user : succes");
-                                FirebaseUser user = mAuth.getCurrentUser();
+                                userToDatabase(email,mAuth.getCurrentUser().getUid());
                             }
                             else{
                                 System.out.println("TAG create user : failed");
@@ -75,6 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
         else{
             Toast.makeText(getBaseContext(),"Wachtwoordvelden komen niet overeen",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void userToDatabase(String email, String uid){
+        User user = new User(uid,email, Role.PATIENT);
     }
 
     public static String md5(String s) {
