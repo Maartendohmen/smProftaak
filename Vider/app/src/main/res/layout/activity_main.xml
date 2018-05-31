@@ -24,4 +24,33 @@
         android:layout_alignParentStart="true"
         android:text="Registreren" />
 
+    <EditText
+        android:id="@+id/txtLoginEmail"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="115dp"
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/txtLoginPW"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtLoginEmail"
+        android:layout_below="@+id/txtLoginEmail"
+        android:hint="Wachtwoord"
+        android:inputType="textPassword"
+        android:layout_marginTop="26dp" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtLoginPW"
+        android:layout_below="@+id/txtLoginPW"
+        android:layout_marginEnd="55dp"
+        android:layout_marginTop="49dp"
+        android:text="Login" />
+
 </RelativeLayout>
