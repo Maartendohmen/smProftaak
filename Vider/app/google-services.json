@@ -67,6 +67,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "317950932344-1gv0l0li0il9svn1ms3kv86qcq3c0co0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.fhict.fontys.vider",
+            "certificate_hash": "aeb70ebb74fd06a4395ae5d933034c165ee426ad"
+          }
+        },
+        {
           "client_id": "317950932344-qioeo4gmm1gr4vnghgnkaa24u168ooe7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
