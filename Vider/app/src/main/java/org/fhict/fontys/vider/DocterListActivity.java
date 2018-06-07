@@ -57,7 +57,7 @@ public class DocterListActivity extends AppCompatActivity {
     private void getAllDocters(){
         //The error said the constructor expected FirebaseListOptions - here you create them:
         FirebaseListOptions<User> options = new FirebaseListOptions.Builder<User>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("users").orderByChild("woonplaats"), User.class)
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("residence"), User.class)
                 .setLayout(R.layout.user)
                 .build();
 

@@ -17,11 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".DocterChatActivity" />
-        <activity android:name=".DocterListActivity"/>
-        <activity android:name=".HomeDoctorActivity"/>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".HomePatientActivity"/>
-
+        <activity android:name=".DocterListActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".HomeDocterActivity" />
+        <activity android:name=".HomePatientActivity"></activity>
     </application>
 
 </manifest>

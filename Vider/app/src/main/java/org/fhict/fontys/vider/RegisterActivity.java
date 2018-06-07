@@ -109,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
      * @param name of the user to save
      */
     private void userToDatabase(String email, String residence, String uid, String name){
-        User user = new User(uid, name, Role.DOCTER, email, residence);
+        User user = new User(uid, name, Role.PATIENT, email, residence);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         reference.child("Users").child(user.getUid()).setValue(user);
     }

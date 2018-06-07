@@ -1,19 +1,23 @@
 package org.fhict.fontys.vider;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
-
-/**
- * Created by maxhe on 1-6-2018.
- */
 
 public class HomePatientActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstance){
-        super.onCreate(savedInstance);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_patient);
 
-        Toast.makeText(getBaseContext(),"PATIENT",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Welcome patient", Toast.LENGTH_SHORT).show();
+    }
+
+    public void chatWithDocter(View view){
+        Intent intent = new Intent(this, DocterListActivity.class);
+        startActivity(intent);
     }
 }

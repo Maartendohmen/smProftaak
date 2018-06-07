@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         else if(user.getRole().equals(Role.DOCTER)){
-            homescreen = new Intent(this, HomeDoctorActivity.class);
+            homescreen = new Intent(this, HomeDocterActivity.class);
             startActivity(homescreen);
         }
     }
