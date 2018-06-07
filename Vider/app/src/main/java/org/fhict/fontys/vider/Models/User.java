@@ -1,8 +1,10 @@
 package org.fhict.fontys.vider.Models;
 
+import android.os.Parcelable;
+
 import com.google.firebase.auth.FirebaseUser;
 
-public class User {
+public class User  {
     private String uid;
     private String name;
     private Role role;
@@ -15,6 +17,10 @@ public class User {
         this.name = name;
         this.role = role;
         this.email = email;
+    }
+
+    public User(){
+
     }
 
     public String getEmail() {
@@ -55,5 +61,10 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString(){
+        return name;
     }
 }

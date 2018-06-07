@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,7 +20,7 @@ public class DocterChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_docter_chat);
 
 
-        Button sendButton = findViewById(R.id.sendMessageImagebutton);
+        ImageButton sendButton = findViewById(R.id.sendMessageImagebutton);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
