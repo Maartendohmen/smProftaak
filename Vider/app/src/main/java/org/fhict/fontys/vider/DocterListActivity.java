@@ -4,18 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.fhict.fontys.vider.Models.User;
-
-import java.util.List;
 
 /**
  * @javadoc Rik van Spreuwel
@@ -74,7 +70,7 @@ public class DocterListActivity extends AppCompatActivity {
 
                 // Set the parameters
                 username.setText(user.getName());
-                woonplaats.setText(user.getWoonplaats());
+                woonplaats.setText(user.getResidence());
             }
         };
         doctersList.setAdapter(doctersAdaper);

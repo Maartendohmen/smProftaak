@@ -1,22 +1,19 @@
 package org.fhict.fontys.vider.Models;
 
-import android.os.Parcelable;
-
-import com.google.firebase.auth.FirebaseUser;
-
 public class User  {
     private String uid;
     private String name;
     private Role role;
     private String email;
-    private String woonplaats;
+    private String residence;
 
 
-    public User(String uid, String name, Role role, String email) {
+    public User(String uid, String name, Role role, String email, String residence) {
         this.uid = uid;
         this.name = name;
         this.role = role;
         this.email = email;
+        this.residence = residence;
     }
 
     public User(){
@@ -31,12 +28,12 @@ public class User  {
         this.email = email;
     }
 
-    public String getWoonplaats() {
-        return woonplaats;
+    public String getResidence() {
+        return residence;
     }
 
-    public void setWoonplaats(String woonplaats) {
-        this.woonplaats = woonplaats;
+    public void setResidence(String residence) {
+        this.residence = residence;
     }
 
     public String getUid() {

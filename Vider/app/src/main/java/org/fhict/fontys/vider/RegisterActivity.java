@@ -23,11 +23,14 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by maxhe on 31-5-2018.
+ *
+ * @javadoc by Rik van Spreuwel
  */
 
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText txtName;
+    private EditText txtResidence;
     private EditText txtEmail;
     private EditText txtPassword;
     private EditText txtConfirm;
@@ -42,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         txtName = findViewById(R.id.txtName);
+        txtResidence = findViewById(R.id.txtResidence);
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
         txtConfirm = findViewById(R.id.txtConfirmPW);
@@ -51,46 +55,73 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(v -> register());
     }
 
+
+    /**
+     * this method registers a new user to the database.
+     * First it gets all the data from the data fields and checks if they meet the
+     * minimum requirements.
+     * Then it registers the new user.
+     */
     private void register(){
 
         String email = txtEmail.getText().toString();
         String password = md5(txtPassword.getText().toString());
         String confirm = md5(txtConfirm.getText().toString());
         String name = txtName.getText().toString();
+        String residence = txtResidence.getText().toString();
 
-        Intent intent = new Intent(this,LoginActivity.class);
+        if (email.isEmpty() || password.isEmpty() || confirm.isEmpty() || name.isEmpty() || residence.isEmpty()){
+            Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this,LoginActivity.class);
 
-        if(password.equals(confirm)){
-            mAuth.createUserWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                System.out.println("TAG create user : succes");
-                                userToDatabase(email,mAuth.getCurrentUser().getUid(),name);
-                                Toast.makeText(getBaseContext(),"Aanmelden is gelukt je kunt nu inloggen",Toast.LENGTH_LONG).show();
-                                startActivity(intent);
+            if(password.equals(confirm)){
+                mAuth.createUserWithEmailAndPassword(email,password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    System.out.println("TAG create user : succes");
+                                    userToDatabase(email, residence, mAuth.getCurrentUser().getUid(), name);
+                                    Toast.makeText(getBaseContext(),"Aanmelden is gelukt je kunt nu inloggen",Toast.LENGTH_LONG).show();
+                                    startActivity(intent);
+                                }
+                                else{
+                                    System.out.println("TAG create user : failed");
+                                    Toast.makeText(getBaseContext(),"Aanmelden mislukt",Toast.LENGTH_SHORT).show();
+                                }
                             }
-                            else{
-                                System.out.println("TAG create user : failed");
-                                Toast.makeText(getBaseContext(),"Aanmelden mislukt",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-        }
-
-        else{
-            Toast.makeText(getBaseContext(),"Wachtwoordvelden komen niet overeen",Toast.LENGTH_SHORT).show();
+                        });
+            }
+            else{
+                Toast.makeText(getBaseContext(),"Wachtwoordvelden komen niet overeen",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
-    private void userToDatabase(String email, String uid, String name){
-        User user = new User(uid,name, Role.PATIENT,email);
+
+    /**
+     * This method saves the user data to the database.
+     *
+     * @param email of the user to save
+     * @param residence of the user to save
+     * @param uid of the user to save
+     * @param name of the user to save
+     */
+    private void userToDatabase(String email, String residence, String uid, String name){
+        User user = new User(uid, name, Role.DOCTER, email, residence);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("User").child(user.getUid()).setValue(user);
+        reference.child("Users").child(user.getUid()).setValue(user);
     }
 
+
+
+    /**
+     * This method hashes the string to md5
+     *
+     * @param s String to hash
+     * @return returns the hashed string
+     */
     public static String md5(String s) {
         final String MD5 = "MD5";
         try {

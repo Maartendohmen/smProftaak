@@ -21,6 +21,9 @@ import org.fhict.fontys.vider.Utilities.AuthenticationReference;
 import org.fhict.fontys.vider.Utilities.DatabaseReference;
 import org.fhict.fontys.vider.Utilities.SimpleDialog;
 
+/**
+ * @javadoc Rik van Spreuwel
+ */
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -51,16 +54,15 @@ public class LoginActivity extends AppCompatActivity {
 
         new AuthenticationReference();
         new org.fhict.fontys.vider.Utilities.DatabaseReference();
-
-        //if user had already been logged in, skip loginscreen and go straight to groupscreen
-        //if (AuthenticationReference.getAuth().getCurrentUser() != null)
-        //{
-        //    Intent homescreen = new Intent(this,HomeActivity.class);
-        //    startActivity(homescreen);
-        //    finish();
-        //}
     }
 
+
+    /**
+     * The login method checks the email and password. If correct, it retrieves
+     * the user's data.
+     *
+     * @param view the current view
+     */
     public void Login(View view) {
 
         //if fields are empty give dialog
@@ -68,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             new SimpleDialog(this,"No Credentials","Please fill in both the required fields");
         }
         //if fields are not empty, try to login
-        else if (tbEmail.getText().toString().isEmpty() == false || tbPassword.getText().toString().isEmpty() == false){
+        else if (!tbEmail.getText().toString().isEmpty() || !tbPassword.getText().toString().isEmpty()){
             AuthenticationReference.getAuth().signInWithEmailAndPassword(tbEmail.getText().toString(), tbPassword.getText().toString());
             FirebaseUser current = AuthenticationReference.getAuth().getCurrentUser();
 
@@ -77,43 +79,51 @@ public class LoginActivity extends AppCompatActivity {
                 new SimpleDialog(this,"Wrong credentials","Please fill in the right credentials");
             } else {
                 getUser(current.getUid());
-                Intent homescreen = null;
-
-                //return to groupscreen
-                if(user.getRole().equals(Role.PATIENT)){
-                    homescreen = new Intent(this,HomePatientActivity.class);
-                    startActivity(homescreen);
-                }
-
-                else if(user.getRole().equals(Role.DOCTER)){
-                    homescreen = new Intent(this, HomeDoctorActivity.class);
-                }
             }
         }
     }
 
 
+    /**
+     * The getUser method retrieves the users data from firebase.
+     * This method creates a reference to the right user and adds a asynchronic listener (!)
+     * which retrieves the user.
+     *
+     * @param uid the users uid
+     */
     public void getUser(String uid){
+        com.google.firebase.database.DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(uid);
 
-
-        com.google.firebase.database.DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User").child(uid);
-
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 System.out.println("CHECK");
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if (snapshot.getValue().equals(uid)) {
-                        User user = snapshot.getValue(User.class);
-                    }
-
-                }
-
+                user = dataSnapshot.getValue(User.class);
+                goToHomeScreen();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        });
+        };
+        reference.addListenerForSingleValueEvent(listener);
+    }
+
+    /**
+     * this method checks wether the user is a Patient or a Docter and
+     * sends them to the right activity.
+     */
+    public void goToHomeScreen(){
+        Intent homescreen = null;
+
+        //return to groupscreen
+        if(user.getRole().equals(Role.PATIENT)){
+            homescreen = new Intent(this,HomePatientActivity.class);
+            startActivity(homescreen);
+        }
+
+        else if(user.getRole().equals(Role.DOCTER)){
+            homescreen = new Intent(this, HomeDoctorActivity.class);
+            startActivity(homescreen);
+        }
     }
 }
