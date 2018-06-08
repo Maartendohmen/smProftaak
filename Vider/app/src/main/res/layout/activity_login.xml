@@ -11,7 +11,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient">
+        android:background="@drawable/gradient"
+        app:titleTextColor="@android:color/white">
 
 
     </android.support.v7.widget.Toolbar>
@@ -22,6 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:background="@drawable/colorbutton"
+        android:textColor="@android:color/white"
         android:text="Registreren" />
 
     <EditText
@@ -44,13 +47,15 @@
         android:layout_marginTop="26dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/tbLoginPW"
         android:layout_below="@+id/tbLoginPW"
-        android:layout_marginEnd="55dp"
+        android:layout_marginEnd="-3dp"
         android:layout_marginTop="49dp"
+        android:background="@drawable/colorbutton"
         android:onClick="Login"
-        android:text="Login" />
+        android:text="Login"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>
