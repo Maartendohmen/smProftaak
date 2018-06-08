@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".DocterChatActivity">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/lstSend"
+                android:layout_width="200dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </ScrollView>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -14,13 +31,6 @@
 
 
     </android.support.v7.widget.Toolbar>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/messagesRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="60dp"
-        android:layout_marginTop="60dp"
-
-        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
