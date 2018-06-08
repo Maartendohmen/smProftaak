@@ -5,6 +5,9 @@
         android:startColor="@color/colorLightBlue"
         android:endColor="@color/colorDarkBlue"
         android:angle="180"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:textSize="22sp"
+        />
 
 </shape>
