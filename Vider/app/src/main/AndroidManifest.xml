@@ -20,7 +20,8 @@
         <activity android:name=".DocterListActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".HomeDocterActivity" />
-        <activity android:name=".HomePatientActivity"></activity>
+        <activity android:name=".HomePatientActivity" />
+        <activity android:name=".InformationActivity"></activity>
     </application>
 
 </manifest>
