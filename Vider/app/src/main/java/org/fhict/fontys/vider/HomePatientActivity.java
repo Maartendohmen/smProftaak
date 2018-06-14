@@ -7,7 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.TextView;
+=======
+import android.widget.ImageView;
+>>>>>>> 147b5f45b834411763015d1baf7a5173c1247f81
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +29,44 @@ public class HomePatientActivity extends AppCompatActivity {
 
 
         Toast.makeText(this, "Welcome patient", Toast.LENGTH_SHORT).show();
+
+        ImageView imgMijnKlachten = (ImageView) findViewById(R.id.imageViewHomePatientMijnKlachten);
+        ImageView imgMijnKlachtenInsturen = (ImageView) findViewById(R.id.imageViewHomePatientKlachtenInsturen);
+        ImageView imgChattenMetDokter = (ImageView) findViewById(R.id.imageViewHomePatientChattenMetDocter);
+        ImageView imgMedicijnenBestellen = (ImageView) findViewById(R.id.imageViewHomePatientMedicijnenBestellen);
+        ImageView imgInformatieOverKlachten = (ImageView) findViewById(R.id.imageViewHomePatientInformatieOverKlachten);
+        imgMijnKlachten.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                System.out.println("Mijn klachten");
+                // TODO: add intent
+            }
+        });
+        imgMijnKlachtenInsturen.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                System.out.println("Mijn klachten insturen");
+                // TODO: add intent
+            }
+        });
+        imgChattenMetDokter.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                System.out.println("Chatten met dokter");
+                Intent intent = new Intent(getBaseContext(), DocterListActivity.class);
+                startActivity(intent);
+            }
+        });
+        imgMedicijnenBestellen.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                System.out.println("Medicijnen bestellen");
+                // TODO: add intent
+            }
+        });
+        imgInformatieOverKlachten.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                System.out.println("Informatie over kalchten");
+                // TODO: add intent
+            }
+        });
+
 
     }
 

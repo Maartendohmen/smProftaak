@@ -20,22 +20,6 @@ public class User  {
 
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getResidence() {
-        return residence;
-    }
-
-    public void setResidence(String residence) {
-        this.residence = residence;
-    }
-
     public String getUid() {
         return uid;
     }
@@ -58,6 +42,22 @@ public class User  {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getResidence() {
+        return residence;
+    }
+
+    public void setResidence(String residence) {
+        this.residence = residence;
     }
 
     @Override
