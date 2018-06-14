@@ -57,9 +57,6 @@ public class DocterChatActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        sendMessagesList = findViewById(R.id.lstSend);
-        ImageButton sendButton = findViewById(R.id.sendMessageImagebutton);
-        EditText input = (EditText)findViewById(R.id.messageEditText);
         sendButton.setEnabled(false);
         getMessages(userUID);
         sendButton.setOnClickListener(view -> newChatMessage(receiverUID, userUID, input));
