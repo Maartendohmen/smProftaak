@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context="org.fhict.fontys.vider.LoginActivity">
 <!--    android:background="@drawable/gradient">-->
 
@@ -57,11 +58,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="188dp"
-        android:layout_height="170dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/tbLoginEmail"
-        android:layout_marginTop="74dp"
-        app:srcCompat="@drawable/loginicon" />
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/googlewhiteicon" />
 
 </RelativeLayout>
