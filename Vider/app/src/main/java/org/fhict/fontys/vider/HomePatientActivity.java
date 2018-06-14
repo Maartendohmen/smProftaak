@@ -32,36 +32,26 @@ public class HomePatientActivity extends AppCompatActivity {
         ImageView imgChattenMetDokter = (ImageView) findViewById(R.id.imageViewHomePatientChattenMetDocter);
         ImageView imgMedicijnenBestellen = (ImageView) findViewById(R.id.imageViewHomePatientMedicijnenBestellen);
         ImageView imgInformatieOverKlachten = (ImageView) findViewById(R.id.imageViewHomePatientInformatieOverKlachten);
-        imgMijnKlachten.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                System.out.println("Mijn klachten");
-                // TODO: add intent
-            }
+        imgMijnKlachten.setOnClickListener(v -> {
+            System.out.println("Mijn klachten");
+            // TODO: add intent
         });
-        imgMijnKlachtenInsturen.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                System.out.println("Mijn klachten insturen");
-                // TODO: add intent
-            }
+        imgMijnKlachtenInsturen.setOnClickListener(v -> {
+            System.out.println("Mijn klachten insturen");
+            // TODO: add intent
         });
-        imgChattenMetDokter.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                System.out.println("Chatten met dokter");
-                Intent intent = new Intent(getBaseContext(), DocterListActivity.class);
-                startActivity(intent);
-            }
+        imgChattenMetDokter.setOnClickListener(v -> {
+            System.out.println("Chatten met dokter");
+            Intent intent = new Intent(getBaseContext(), DocterListActivity.class);
+            startActivity(intent);
         });
-        imgMedicijnenBestellen.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                System.out.println("Medicijnen bestellen");
-                // TODO: add intent
-            }
+        imgMedicijnenBestellen.setOnClickListener(v -> {
+            System.out.println("Medicijnen bestellen");
+            // TODO: add intent
         });
-        imgInformatieOverKlachten.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                System.out.println("Informatie over kalchten");
-                // TODO: add intent
-            }
+        imgInformatieOverKlachten.setOnClickListener(v -> {
+            System.out.println("Informatie over kalchten");
+            // TODO: add intent
         });
 
 
