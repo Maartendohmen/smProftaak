@@ -5,7 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomePatientActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient"
+        app:titleTextColor="@android:color/white">
 
+
+    </android.support.v7.widget.Toolbar>
     <Button
         android:id="@+id/btnChatWithDocter"
         android:layout_width="wrap_content"
@@ -13,6 +21,8 @@
         android:layout_marginStart="16dp"
         android:onClick="chatWithDocter"
         android:text="Chat with docter"
+        android:background="@drawable/colorbutton"
+        android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="169dp" />
 </android.support.constraint.ConstraintLayout>

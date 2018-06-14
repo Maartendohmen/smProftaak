@@ -13,6 +13,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.fhict.fontys.vider.Models.User;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @javadoc Rik van Spreuwel
  */
@@ -57,7 +61,7 @@ public class DocterListActivity extends AppCompatActivity {
     private void getAllDocters(){
         //The error said the constructor expected FirebaseListOptions - here you create them:
         FirebaseListOptions<User> options = new FirebaseListOptions.Builder<User>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("residence"), User.class)
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("Users").orderByChild("role").equalTo("DOCTER"), User.class)
                 .setLayout(R.layout.user)
                 .build();
 
