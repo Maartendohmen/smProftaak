@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
      * @param residence of the user to save
      * @param name of the user to save
      */
-    private void userToDatabase(String residence, String name){
+    private void userToDatabase(String name, String residence){
         if (name.isEmpty() || residence.isEmpty()){
             Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
         } else {
