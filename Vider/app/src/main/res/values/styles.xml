@@ -9,4 +9,13 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="CustomEditTextWhite" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHighlight">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:textColorLink">@android:color/white</item>
+        <item name="android:shadowColor">@android:color/white</item>
+        <item name="android:backgroundTint">@android:color/white</item>
+    </style>
+
 </resources>

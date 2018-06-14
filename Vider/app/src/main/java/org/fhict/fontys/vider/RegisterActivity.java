@@ -70,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
             reference.child("Users").child(user.getUid()).setValue(user);
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -88,7 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseAuth.getInstance().getCurrentUser().delete();
-                        FirebaseAuth.getInstance().signOut();
                         Toast.makeText(getApplicationContext(), "Your account has not been made", Toast.LENGTH_SHORT).show();
                         finish();
                     }
