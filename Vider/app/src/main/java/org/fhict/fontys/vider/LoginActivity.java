@@ -2,6 +2,7 @@ package org.fhict.fontys.vider;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -38,7 +40,6 @@ import org.fhict.fontys.vider.Utilities.SimpleDialog;
  */
 
 public class LoginActivity extends AppCompatActivity {
-
     private final static int SIGN_IN_REQUEST_CODE = 1;
     private User user;
     // Progress dialog
@@ -52,10 +53,11 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
 
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       /* Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
 
 
         FirebaseAuth auth = FirebaseAuth.getInstance();

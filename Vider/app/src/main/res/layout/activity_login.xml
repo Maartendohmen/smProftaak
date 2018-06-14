@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     tools:context="org.fhict.fontys.vider.LoginActivity">
-<!--    android:background="@drawable/gradient">-->
+    <!--    android:background="@drawable/gradient">-->
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,18 +21,34 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="130dp"
         android:onClick="Login"
+        android:background="@drawable/colorbuttonwhite"
         android:text="Login"
         android:textColor="@android:color/white" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="257dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
         app:srcCompat="@mipmap/googlewhiteicon" />
+
+    <TextView
+        android:id="@+id/bodyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="228dp"
+        android:fontFamily="@font/roboto_bold"
+        android:lineSpacingExtra="12sp"
+        android:text="Vider"
+        android:textColor="@android:color/background_light"
+        android:textSize="36sp" />
 
 </RelativeLayout>
