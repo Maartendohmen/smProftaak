@@ -3,6 +3,7 @@ package org.fhict.fontys.vider;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -53,6 +54,12 @@ public class DocterChatActivity extends AppCompatActivity {
         messagesList = findViewById(R.id.list_of_messages);
         ImageButton sendButton = findViewById(R.id.btnSend);
         EditText input = (EditText) findViewById(R.id.input);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        sendMessagesList = findViewById(R.id.lstSend);
+        ImageButton sendButton = findViewById(R.id.sendMessageImagebutton);
+        EditText input = (EditText)findViewById(R.id.messageEditText);
         sendButton.setEnabled(false);
         getMessages(userUID);
         sendButton.setOnClickListener(view -> newChatMessage(receiverUID, userUID, input));

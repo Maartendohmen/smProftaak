@@ -2,6 +2,7 @@ package org.fhict.fontys.vider;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -38,7 +40,6 @@ import org.fhict.fontys.vider.Utilities.SimpleDialog;
  */
 
 public class LoginActivity extends AppCompatActivity {
-
     private final static int SIGN_IN_REQUEST_CODE = 1;
     private User user;
     // Progress dialog
@@ -52,10 +53,11 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
 
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       /* Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
 
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -190,6 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
                         startActivity(registerIntent);
                         finish();
+                        hideDialog();
                     } else {
                         goToHomeScreen();
                     }
@@ -201,12 +204,6 @@ public class LoginActivity extends AppCompatActivity {
             };
             reference.addListenerForSingleValueEvent(listener);
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            hideDialog();
         }
     }
 
@@ -220,11 +217,13 @@ public class LoginActivity extends AppCompatActivity {
         //return to groupscreen
         if(user.getRole().equals(Role.PATIENT)){
             homescreen = new Intent(this,HomePatientActivity.class);
+            hideDialog();
             startActivity(homescreen);
         }
 
         else if(user.getRole().equals(Role.DOCTER)){
             homescreen = new Intent(this, HomeDocterActivity.class);
+            hideDialog();
             startActivity(homescreen);
         }
     }
@@ -237,19 +236,5 @@ public class LoginActivity extends AppCompatActivity {
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
-    }
-
-    /**
-     * This method saves the user data to the database.
-     *
-     * @param email of the user to save
-     * @param residence of the user to save
-     * @param uid of the user to save
-     * @param name of the user to save
-     */
-    private void userToDatabase(String email, String residence, String uid, String name){
-        User user = new User(uid, name, Role.PATIENT, email, residence);
-        com.google.firebase.database.DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("Users").child(user.getUid()).setValue(user);
     }
 }
