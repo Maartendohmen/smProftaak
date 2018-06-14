@@ -4,8 +4,7 @@
         <shape>
             <gradient
                 android:angle="90"
-                android:endColor="#313877"
-                android:startColor="#313877" />
+                 />
             <stroke
                 android:width="3dp"
                 android:color="#313877" />
@@ -42,8 +41,7 @@
         <shape>
             <gradient
                 android:angle="270"
-                android:endColor="#59609d"
-                android:startColor="#59609d" />
+                 />
             <stroke
                 android:width="3dp"
                 android:color="#59609d" />

@@ -40,6 +40,7 @@ public class DocterListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_docter_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         doctersList = findViewById(R.id.DoctersListView);
         getAllDocters();
 

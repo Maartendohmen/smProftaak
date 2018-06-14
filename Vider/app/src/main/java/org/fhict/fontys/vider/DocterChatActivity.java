@@ -39,6 +39,8 @@ public class DocterChatActivity extends AppCompatActivity {
         String senderUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         setSupportActionBar(toolbar);
 
         sendMessagesList = findViewById(R.id.lstSend);

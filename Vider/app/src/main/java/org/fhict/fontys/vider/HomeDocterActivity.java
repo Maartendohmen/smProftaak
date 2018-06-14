@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +18,8 @@ public class HomeDocterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_docter);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         setSupportActionBar(toolbar);
 
         Toast.makeText(this, "Welcome docter", Toast.LENGTH_SHORT).show();
