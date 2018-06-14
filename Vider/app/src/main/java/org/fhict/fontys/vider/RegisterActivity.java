@@ -1,8 +1,10 @@
 package org.fhict.fontys.vider;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
@@ -32,9 +34,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText txtName;
     private EditText txtResidence;
-    private EditText txtEmail;
-    private EditText txtPassword;
-    private EditText txtConfirm;
     private Button btnRegister;
     private FirebaseAuth mAuth;
 
@@ -48,104 +47,60 @@ public class RegisterActivity extends AppCompatActivity {
 
         txtName = findViewById(R.id.txtName);
         txtResidence = findViewById(R.id.txtResidence);
-        txtEmail = findViewById(R.id.txtEmail);
-        txtPassword = findViewById(R.id.txtPassword);
-        txtConfirm = findViewById(R.id.txtConfirmPW);
 
         btnRegister = findViewById(R.id.btnRegister);
 
-        btnRegister.setOnClickListener(v -> register());
+        btnRegister.setOnClickListener(v -> userToDatabase(txtName.getText().toString(), txtResidence.getText().toString()));
     }
 
 
     /**
-     * this method registers a new user to the database.
-     * First it gets all the data from the data fields and checks if they meet the
-     * minimum requirements.
-     * Then it registers the new user.
-     */
-    private void register(){
-
-        String email = txtEmail.getText().toString();
-        String password = md5(txtPassword.getText().toString());
-        String confirm = md5(txtConfirm.getText().toString());
-        String name = txtName.getText().toString();
-        String residence = txtResidence.getText().toString();
-
-        if (email.isEmpty() || password.isEmpty() || confirm.isEmpty() || name.isEmpty() || residence.isEmpty()){
-            Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent(this,LoginActivity.class);
-
-            if(password.equals(confirm)){
-                mAuth.createUserWithEmailAndPassword(email,password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    System.out.println("TAG create user : succes");
-                                    userToDatabase(email, residence, mAuth.getCurrentUser().getUid(), name);
-                                    Toast.makeText(getBaseContext(),"Aanmelden is gelukt je kunt nu inloggen",Toast.LENGTH_LONG).show();
-                                    startActivity(intent);
-                                }
-                                else{
-                                    System.out.println("TAG create user : failed");
-                                    Toast.makeText(getBaseContext(),"Aanmelden mislukt",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-            else{
-                Toast.makeText(getBaseContext(),"Wachtwoordvelden komen niet overeen",Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-
-    /**
-     * This method saves the user data to the database.
+     * This method saves the user data to the database. After saving the user to the database,
+     * it starts the login activity again, which will redirect you to the home page.
      *
-     * @param email of the user to save
      * @param residence of the user to save
-     * @param uid of the user to save
      * @param name of the user to save
      */
-    private void userToDatabase(String email, String residence, String uid, String name){
-        User user = new User(uid, name, Role.PATIENT, email, residence);
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("Users").child(user.getUid()).setValue(user);
+    private void userToDatabase(String residence, String name){
+        if (name.isEmpty() || residence.isEmpty()){
+            Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
+        } else {
+            User user = new User(FirebaseAuth.getInstance().getUid(), name, Role.PATIENT, FirebaseAuth.getInstance().getCurrentUser().getEmail(), residence);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+            reference.child("Users").child(user.getUid()).setValue(user);
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
-
-
     /**
-     * This method hashes the string to md5
-     *
-     * @param s String to hash
-     * @return returns the hashed string
+     * The onBackPressed() method is made to make sure no account is created without a name and residence.
+     * This method shows a alertDialog that gives the user a choice to delete their account or cancel.
      */
-    public static String md5(String s) {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
+    @Override
+    public void onBackPressed(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Back");
+        builder.setMessage("Are you sure you want to stop registering?");
+        builder.setPositiveButton("Stop",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().getCurrentUser().delete();
+                        FirebaseAuth.getInstance().signOut();
+                        Toast.makeText(getApplicationContext(), "Your account has not been made", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
             }
-            return hexString.toString();
+        });
 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
