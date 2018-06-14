@@ -15,8 +15,30 @@
         app:titleTextColor="@android:color/white">
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vider"
+            android:textSize="32dp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title" />
 
     </android.support.v7.widget.Toolbar>
+
+    <Button
+        android:id="@+id/btnChatWithDocter"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/colorbutton"
+        android:onClick="chatWithDocter"
+        android:text="Chat with docter"
+        android:textColor="#585f9d"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     <LinearLayout
@@ -24,8 +46,13 @@
         android:layout_width="match_parent"
         android:layout_height="257dp"
         android:orientation="horizontal"
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+
         app:layout_constraintTop_toTopOf="@id/toolbar">
 
         <ImageView
@@ -256,5 +283,6 @@
         </TableRow>
     </TableLayout>
 
+>>>>>>> 147b5f45b834411763015d1baf7a5173c1247f81
 
 </android.support.constraint.ConstraintLayout>

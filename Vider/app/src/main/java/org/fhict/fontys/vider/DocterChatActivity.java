@@ -55,6 +55,8 @@ public class DocterChatActivity extends AppCompatActivity {
         ImageButton sendButton = findViewById(R.id.btnSend);
         EditText input = (EditText) findViewById(R.id.input);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         setSupportActionBar(toolbar);
 
         sendButton.setEnabled(false);
