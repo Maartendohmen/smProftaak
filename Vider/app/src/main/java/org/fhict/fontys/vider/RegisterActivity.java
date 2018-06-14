@@ -85,19 +85,13 @@ public class RegisterActivity extends AppCompatActivity {
         builder.setTitle("Back");
         builder.setMessage("Are you sure you want to stop registering?");
         builder.setPositiveButton("Stop",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        FirebaseAuth.getInstance().getCurrentUser().delete();
-                        Toast.makeText(getApplicationContext(), "Your account has not been made", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
+                (dialog, which) -> {
+                    FirebaseAuth.getInstance().getCurrentUser().delete();
+                    Toast.makeText(getApplicationContext(), "Your account has not been made", Toast.LENGTH_SHORT).show();
+                    finish();
                 });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
+        builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+            // do nothing
         });
 
         AlertDialog dialog = builder.create();

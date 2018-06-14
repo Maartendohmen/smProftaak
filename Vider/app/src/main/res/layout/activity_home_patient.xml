@@ -14,6 +14,31 @@
 
 
     </android.support.v7.widget.Toolbar>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="257dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar">
+
+        <ImageView
+            android:id="@+id/imageViewHomePatient"
+            android:layout_width="wrap_content"
+            android:layout_height="257dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="43dp"
+            android:layout_weight="1"
+
+            app:srcCompat="@drawable/loginicon" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnChatWithDocter"
         android:layout_width="wrap_content"
@@ -23,6 +48,7 @@
         android:text="Chat with docter"
         android:background="@drawable/colorbutton"
         android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/imageViewHomePatient"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="169dp" />
 </android.support.constraint.ConstraintLayout>
