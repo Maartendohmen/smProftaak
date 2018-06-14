@@ -8,6 +8,7 @@
         android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:textSize="22sp"
+
         />
 
 </shape>
