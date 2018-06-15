@@ -29,7 +29,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".SendComplainActivity"></activity>
+        <activity android:name=".SendComplainActivity" />
+        <activity android:name=".MyComplainsActivity"></activity>
     </application>
 
 </manifest>

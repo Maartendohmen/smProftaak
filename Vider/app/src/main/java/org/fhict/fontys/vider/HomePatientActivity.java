@@ -34,7 +34,8 @@ public class HomePatientActivity extends AppCompatActivity {
         ImageView imgInformatieOverKlachten = (ImageView) findViewById(R.id.imageViewHomePatientInformatieOverKlachten);
         imgMijnKlachten.setOnClickListener(v -> {
             System.out.println("Mijn klachten");
-            // TODO: add intent
+            Intent intent = new Intent(getBaseContext(), MyComplainsActivity.class);
+            startActivity(intent);
         });
         imgMijnKlachtenInsturen.setOnClickListener(v -> {
             System.out.println("Mijn klachten insturen");
@@ -49,6 +50,7 @@ public class HomePatientActivity extends AppCompatActivity {
         imgMedicijnenBestellen.setOnClickListener(v -> {
             System.out.println("Medicijnen bestellen");
             // TODO: add intent
+
         });
 
         imgInformatieOverKlachten.setOnClickListener(v -> {
