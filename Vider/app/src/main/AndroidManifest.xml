@@ -3,6 +3,7 @@
     package="org.fhict.fontys.vider">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/googlehomecolor"
@@ -22,11 +23,13 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".HomeDocterActivity" />
         <activity android:name=".HomePatientActivity" />
-        <activity android:name=".InformationActivity"></activity>
+        <activity android:name=".InformationActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".SendComplainActivity"></activity>
     </application>
 
 </manifest>

@@ -50,6 +50,13 @@ public class HomePatientActivity extends AppCompatActivity {
             // TODO: add intent
         });
 
+        imgInformatieOverKlachten.setOnClickListener(v -> {
+            System.out.println("Informatie over kalchten");
+            Intent intent = new Intent(getBaseContext(), InformationActivity.class);
+            startActivity(intent);
+        });
+
+
         imgInformatieOverKlachten.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Informatie over kalchten");
