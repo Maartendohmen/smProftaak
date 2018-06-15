@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +38,9 @@ import java.util.List;
 
 public class DocterChatActivity extends AppCompatActivity {
 
+    private FirebaseListAdapter<ChatMessage> adapterMessages;
+    private FirebaseListOptions<ChatMessage> adapterOptions;
     private ListView messagesList;
-    private List<ChatMessage> messageList;
     private ArrayAdapter<ChatMessage> messageArrayAdapter;
 
     @Override
@@ -50,7 +52,7 @@ public class DocterChatActivity extends AppCompatActivity {
         String doctorUID = intent.getStringExtra("docterUid");
         String patientUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        messageList = new ArrayList<>();
+
         messagesList = findViewById(R.id.list_of_messages);
         ImageButton sendButton = findViewById(R.id.btnSend);
         EditText input = (EditText) findViewById(R.id.input);
@@ -61,7 +63,7 @@ public class DocterChatActivity extends AppCompatActivity {
 
         sendButton.setEnabled(false);
         getMessages(patientUID,doctorUID);
-        sendButton.setOnClickListener(view -> newChatMessage(patientUID, doctorUID, input));
+        sendButton.setOnClickListener(view -> newChatMessage(doctorUID, patientUID, input));
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,15 +109,39 @@ public class DocterChatActivity extends AppCompatActivity {
     }
 
     private void getMessages(String patientUID, String doctorUID) {
+        System.out.println("TAG? "+patientUID);
 
-        messageArrayAdapter = new ArrayAdapter<ChatMessage>(this, R.layout.message_send, messageList);
-        messagesList.setAdapter(messageArrayAdapter);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Messages").child(patientUID);
+        List<ChatMessage> messages = new ArrayList<>();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Messages");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+                    ChatMessage message = data.getValue(ChatMessage.class);
 
+                    if(message.getMessageSender().equals(patientUID)){
+                        message.setMessageSender("U");
+                        System.out.println("TAG!! " + message.getMessageSender());
+                    }
+
+                    else if(message.getMessageReceiver().equals(doctorUID) || message.getMessageSender().equals(doctorUID)){
+                        DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("Users").child(message.getMessageSender());
+                        referenceUser.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                message.setMessageSender(dataSnapshot.child("name").getValue(String.class));
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
+                    messages.add(message);
+                }
             }
 
             @Override
@@ -123,7 +149,10 @@ public class DocterChatActivity extends AppCompatActivity {
 
             }
         });
-        messageArrayAdapter.notifyDataSetChanged();
+
+        ArrayAdapter<ChatMessage> messageAdapter = new ArrayAdapter<ChatMessage>(this,android.R.layout.simple_list_item_1,messages);
+        messagesList.setAdapter(messageAdapter);
+        messageAdapter.notifyDataSetChanged();
     }
 }
 

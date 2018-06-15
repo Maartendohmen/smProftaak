@@ -76,4 +76,9 @@ public class ChatMessage {
         }
     }
 
+    @Override
+    public String toString(){
+        return messageSender + "        " + messageTime + "\n" + messageText;
+    }
+
 }
