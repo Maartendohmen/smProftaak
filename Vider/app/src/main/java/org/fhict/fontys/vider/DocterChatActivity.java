@@ -33,6 +33,8 @@ public class DocterChatActivity extends AppCompatActivity {
     private FirebaseListOptions<ChatMessage> adapterOptions;
     private ListView messagesList;
     private ArrayAdapter<ChatMessage> messageArrayAdapter;
+    private DatabaseReference reference;
+    private MessageAdapter messageAdapter;
     private User currentUser;
 
     @Override
@@ -86,12 +88,13 @@ public class DocterChatActivity extends AppCompatActivity {
     private void getMessages(String patientUID, String doctorUID) {
         System.out.println("TAG? "+patientUID);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Messages").child(patientUID);
+        reference = FirebaseDatabase.getInstance().getReference("Messages").child(patientUID);
         List<ChatMessage> messages = new ArrayList<>();
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                messages.clear();
                 for(DataSnapshot data : dataSnapshot.getChildren()){
                     ChatMessage message = data.getValue(ChatMessage.class);
 
@@ -105,7 +108,7 @@ public class DocterChatActivity extends AppCompatActivity {
                         referenceUser.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                message.setMessageSender(dataSnapshot.child("name").getValue(String.class));
+                                message.setSenderName(dataSnapshot.child("name").getValue(String.class));
                             }
 
                             @Override
@@ -116,7 +119,9 @@ public class DocterChatActivity extends AppCompatActivity {
                     }
 
                     messages.add(message);
+                    messageAdapter.notifyDataSetChanged();
                 }
+
             }
 
             @Override
@@ -125,12 +130,10 @@ public class DocterChatActivity extends AppCompatActivity {
             }
         });
 
-        MessageAdapter messageAdapter = new MessageAdapter(this, messages);
+        messageAdapter = new MessageAdapter(this, messages);
         messagesList.setAdapter(messageAdapter);
         messageAdapter.notifyDataSetChanged();
     }
-
-    private User user = null;
 
 }
 

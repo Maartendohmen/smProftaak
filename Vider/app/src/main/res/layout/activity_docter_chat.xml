@@ -55,7 +55,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/inputLayout"
 
-            android:dividerHeight="16dp"
+            android:dividerHeight="1dp"
             android:divider="@android:color/transparent"
             android:id="@+id/list_of_messages"/>
 

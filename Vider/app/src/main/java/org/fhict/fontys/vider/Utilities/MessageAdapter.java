@@ -54,7 +54,7 @@ public class MessageAdapter extends BaseAdapter {
         LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         ChatMessage message = messages.get(i);
 
-        if (message.getMessageSender().equals(FirebaseAuth.getInstance().getUid())) { // this message was sent by us so let's create a basic chat bubble on the right
+        if (message.getMessageSender().equals("U")) { // this message was sent by us so let's create a basic chat bubble on the right
             convertView = messageInflater.inflate(R.layout.my_message, null);
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
