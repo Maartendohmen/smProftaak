@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DocterChatActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".DocterChatActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".DocterListActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".HomeDocterActivity" />
@@ -30,7 +32,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".SendComplainActivity" />
-        <activity android:name=".MyComplainsActivity"></activity>
+        <activity android:name=".MyComplainsActivity" />
+        <activity android:name=".OrderMedicines"></activity>
     </application>
 
 </manifest>

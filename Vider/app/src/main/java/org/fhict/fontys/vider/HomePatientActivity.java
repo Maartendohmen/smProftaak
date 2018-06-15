@@ -54,7 +54,9 @@ public class HomePatientActivity extends AppCompatActivity {
         });
         imgMedicijnenBestellen.setOnClickListener(v -> {
             System.out.println("Medicijnen bestellen");
-            // TODO: add intent
+            Intent intent = new Intent(getBaseContext(), OrderMedicines.class);
+            intent.putExtra("currentUser", currentUser);
+            startActivity(intent);
 
         });
 
