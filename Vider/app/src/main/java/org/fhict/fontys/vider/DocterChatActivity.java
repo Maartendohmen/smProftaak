@@ -1,6 +1,7 @@
 package org.fhict.fontys.vider;
 
 import android.content.Intent;
+import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,16 +32,14 @@ import org.fhict.fontys.vider.Models.ChatMessage;
 import org.fhict.fontys.vider.Models.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DocterChatActivity extends AppCompatActivity {
 
-    private FirebaseListOptions<ChatMessage> sendAdapterOptions;
-    private FirebaseListAdapter<ChatMessage> sendAdapter;
     private ListView messagesList;
-    private FirebaseListOptions<ChatMessage> receivedAdapterOptions;
-    private FirebaseListAdapter<ChatMessage> receivedAdapter;
     private List<ChatMessage> messageList;
+    private ArrayAdapter<ChatMessage> messageArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,21 +47,21 @@ public class DocterChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_docter_chat);
 
         Intent intent = getIntent();
-        String receiverUID = intent.getStringExtra("docterUid");
-        String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String doctorUID = intent.getStringExtra("docterUid");
+        String patientUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         messageList = new ArrayList<>();
         messagesList = findViewById(R.id.list_of_messages);
         ImageButton sendButton = findViewById(R.id.btnSend);
         EditText input = (EditText) findViewById(R.id.input);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        setSupportActionBar(toolbar);
 
         sendButton.setEnabled(false);
-        getMessages(userUID);
-        sendButton.setOnClickListener(view -> newChatMessage(receiverUID, userUID, input));
+        getMessages(patientUID,doctorUID);
+        sendButton.setOnClickListener(view -> newChatMessage(patientUID, doctorUID, input));
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,7 +90,14 @@ public class DocterChatActivity extends AppCompatActivity {
         // of ChatMessage to the Firebase database
         FirebaseDatabase.getInstance()
                 .getReference("Messages")
-                .push()
+                .child(senderUID).child(new Date().toString())
+                .setValue(new ChatMessage(input.getText().toString(),
+                        receiverUID,
+                        senderUID));
+
+        FirebaseDatabase.getInstance()
+                .getReference("Messages")
+                .child(receiverUID ).child(new Date().toString())
                 .setValue(new ChatMessage(input.getText().toString(),
                         receiverUID,
                         senderUID));
@@ -99,30 +106,24 @@ public class DocterChatActivity extends AppCompatActivity {
         input.setText("");
     }
 
-    private void getMessages(String userUID) {
-        
-        sendAdapterOptions = new FirebaseListOptions.Builder<ChatMessage>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("Messages").equalTo("messageSender",userUID)
-                        .equalTo("messageReceiver",userUID),ChatMessage.class)
-                .setLayout(R.layout.message_send)
-                .build();
+    private void getMessages(String patientUID, String doctorUID) {
 
+        messageArrayAdapter = new ArrayAdapter<ChatMessage>(this, R.layout.message_send, messageList);
+        messagesList.setAdapter(messageArrayAdapter);
 
-        sendAdapter = new FirebaseListAdapter<ChatMessage>(sendAdapterOptions) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Messages");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            protected void populateView(View v, ChatMessage model, int position) {
-                TextView message = (TextView)v.findViewById(R.id.message_text);
-                TextView time = (TextView)v.findViewById(R.id.message_time);
-                TextView user = (TextView)v.findViewById(R.id.message_user);
-
-                user.setText(model.getMessageSender());
-                message.setText(model.getMessageText());
-                time.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMessageTime()));
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
             }
-        };
-        messagesList.setAdapter(sendAdapter);
-        sendAdapter.startListening();
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        messageArrayAdapter.notifyDataSetChanged();
     }
 }
 
