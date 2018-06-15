@@ -120,6 +120,7 @@ public class DocterChatActivity extends AppCompatActivity {
 
                     messages.add(message);
                     messageAdapter.notifyDataSetChanged();
+                    messagesList.setSelection(messagesList.getCount()-1);
                 }
 
             }
