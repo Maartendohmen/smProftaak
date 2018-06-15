@@ -10,11 +10,13 @@ public class ChatMessage {
     private String messageReceiver;
     private String messageSender;
     private long messageTime;
+    private String senderName;
 
-    public ChatMessage(String messageText, String messageReceiver, String messageSender) {
+    public ChatMessage(String messageText, String messageReceiver, String messageSender, String senderName) {
         this.messageText = messageText;
         this.messageReceiver = messageReceiver;
         this.messageSender = messageSender;
+        this.senderName = senderName;
 
         //Initialize time
         messageTime = new Date().getTime();
@@ -54,6 +56,14 @@ public class ChatMessage {
 
     public void setMessageTime(long messageTime) {
         this.messageTime = messageTime;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 
     static class ChatMessageComparator implements Comparator<ChatMessage>

@@ -23,6 +23,7 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,7 +51,7 @@ public class DocterChatActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String doctorUID = intent.getStringExtra("docterUid");
-        String patientUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseUser patient = FirebaseAuth.getInstance().getCurrentUser();
 
 
         messagesList = findViewById(R.id.list_of_messages);
@@ -62,8 +63,8 @@ public class DocterChatActivity extends AppCompatActivity {
 //        setSupportActionBar(toolbar);
 
         sendButton.setEnabled(false);
-        getMessages(patientUID,doctorUID);
-        sendButton.setOnClickListener(view -> newChatMessage(doctorUID, patientUID, input));
+        getMessages(patient.getUid(),doctorUID);
+        sendButton.setOnClickListener(view -> newChatMessage(doctorUID, patient, input));
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -86,23 +87,23 @@ public class DocterChatActivity extends AppCompatActivity {
         });
     }
 
-    private void newChatMessage(String receiverUID, String senderUID, EditText input) {
+    private void newChatMessage(String receiverUID, FirebaseUser sender, EditText input) {
 
         // Read the input field and push a new instance
         // of ChatMessage to the Firebase database
         FirebaseDatabase.getInstance()
                 .getReference("Messages")
-                .child(senderUID).child(new Date().toString())
+                .child(sender.getUid()).child(new Date().toString())
                 .setValue(new ChatMessage(input.getText().toString(),
                         receiverUID,
-                        senderUID));
+                        sender.getUid(),sender.getDisplayName()));
 
         FirebaseDatabase.getInstance()
                 .getReference("Messages")
                 .child(receiverUID ).child(new Date().toString())
                 .setValue(new ChatMessage(input.getText().toString(),
                         receiverUID,
-                        senderUID));
+                        sender.getUid(),sender.getDisplayName()));
 
         // Clear the input
         input.setText("");
@@ -154,5 +155,8 @@ public class DocterChatActivity extends AppCompatActivity {
         messagesList.setAdapter(messageAdapter);
         messageAdapter.notifyDataSetChanged();
     }
+
+    private User user = null;
+
 }
 
