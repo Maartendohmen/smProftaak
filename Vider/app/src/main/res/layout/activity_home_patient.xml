@@ -169,17 +169,6 @@
 
                     android:text="Chatten met de docter" />
             </LinearLayout>
-
-
-            <!--<Button-->
-            <!--android:id="@+id/btnChatWithDocter"-->
-            <!--android:layout_width="159dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@drawable/colorbutton"-->
-            <!--android:onClick="chatWithDocter"-->
-            <!--android:text="Chat with docter"-->
-            <!--android:textColor="@android:color/white" />-->
         </TableRow>
 
 
@@ -268,7 +257,4 @@
             </LinearLayout>
         </TableRow>
     </TableLayout>
-
->>>>>>> 147b5f45b834411763015d1baf7a5173c1247f81
-
 </android.support.constraint.ConstraintLayout>
