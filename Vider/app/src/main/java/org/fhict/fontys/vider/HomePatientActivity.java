@@ -72,7 +72,7 @@ public class HomePatientActivity extends AppCompatActivity {
             Intent intent = new Intent(this, DocterListActivity.class);
             startActivity(intent);
         }
-    }
+
     @Override
     public void onBackPressed(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
