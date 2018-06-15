@@ -51,7 +51,8 @@ public class HomePatientActivity extends AppCompatActivity {
         });
         imgInformatieOverKlachten.setOnClickListener(v -> {
             System.out.println("Informatie over kalchten");
-            // TODO: add intent
+            Intent intent = new Intent(getBaseContext(), InformationActivity.class);
+            startActivity(intent);
         });
 
 
