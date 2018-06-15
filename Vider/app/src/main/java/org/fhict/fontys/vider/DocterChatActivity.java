@@ -32,6 +32,7 @@ import org.fhict.fontys.vider.Models.ChatMessage;
 import org.fhict.fontys.vider.Models.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DocterChatActivity extends AppCompatActivity {
@@ -53,10 +54,10 @@ public class DocterChatActivity extends AppCompatActivity {
         messagesList = findViewById(R.id.list_of_messages);
         ImageButton sendButton = findViewById(R.id.btnSend);
         EditText input = (EditText) findViewById(R.id.input);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        setSupportActionBar(toolbar);
 
         sendButton.setEnabled(false);
         getMessages(patientUID,doctorUID);
@@ -89,7 +90,14 @@ public class DocterChatActivity extends AppCompatActivity {
         // of ChatMessage to the Firebase database
         FirebaseDatabase.getInstance()
                 .getReference("Messages")
-                .push()
+                .child(senderUID).child(new Date().toString())
+                .setValue(new ChatMessage(input.getText().toString(),
+                        receiverUID,
+                        senderUID));
+
+        FirebaseDatabase.getInstance()
+                .getReference("Messages")
+                .child(receiverUID ).child(new Date().toString())
                 .setValue(new ChatMessage(input.getText().toString(),
                         receiverUID,
                         senderUID));
@@ -107,23 +115,7 @@ public class DocterChatActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot s : dataSnapshot.getChildren()){
-                    ChatMessage chatMessage = s.getValue(ChatMessage.class);
 
-                    if((chatMessage.getMessageReceiver() == patientUID && chatMessage.getMessageSender() == doctorUID) ||
-                            (chatMessage.getMessageSender() == patientUID && chatMessage.getMessageReceiver() == doctorUID)){
-
-                        TextView message = findViewById(R.id.message_text);
-                        TextView time = findViewById(R.id.message_time);
-                        TextView user = findViewById(R.id.message_user);
-
-                        message.setText(chatMessage.getMessageText());
-                        time.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-                                chatMessage.getMessageTime()));
-                        user.setText(chatMessage.getMessageSender());
-
-                    }
-                }
             }
 
             @Override
