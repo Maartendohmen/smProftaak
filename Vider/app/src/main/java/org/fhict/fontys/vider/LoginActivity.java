@@ -217,12 +217,14 @@ public class LoginActivity extends AppCompatActivity {
         //return to groupscreen
         if(user.getRole().equals(Role.PATIENT)){
             homescreen = new Intent(this,HomePatientActivity.class);
+            homescreen.putExtra("currentUser", user);
             hideDialog();
             startActivity(homescreen);
         }
 
         else if(user.getRole().equals(Role.DOCTER)){
             homescreen = new Intent(this, HomeDocterActivity.class);
+            homescreen.putExtra("currentUser", user);
             hideDialog();
             startActivity(homescreen);
         }

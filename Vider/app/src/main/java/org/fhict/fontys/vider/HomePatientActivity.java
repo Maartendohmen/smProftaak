@@ -13,7 +13,10 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.fhict.fontys.vider.Models.User;
+
 public class HomePatientActivity extends AppCompatActivity {
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class HomePatientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_patient);
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
+        currentUser = (User)getIntent().getSerializableExtra("currentUser");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -45,6 +49,7 @@ public class HomePatientActivity extends AppCompatActivity {
         imgChattenMetDokter.setOnClickListener(v -> {
             System.out.println("Chatten met dokter");
             Intent intent = new Intent(getBaseContext(), DocterListActivity.class);
+            intent.putExtra("currentUser", currentUser);
             startActivity(intent);
         });
         imgMedicijnenBestellen.setOnClickListener(v -> {

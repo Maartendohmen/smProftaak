@@ -22,6 +22,7 @@ import java.util.List;
  * @javadoc Rik van Spreuwel
  */
 public class DocterListActivity extends AppCompatActivity {
+    private User currentUser;
     private FirebaseListAdapter<User> doctersAdaper;
     private ListView doctersList;
 
@@ -42,12 +43,14 @@ public class DocterListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         doctersList = findViewById(R.id.DoctersListView);
+        currentUser = (User)getIntent().getSerializableExtra("currentUser");
         getAllDocters();
 
         doctersList.setOnItemClickListener((parent, view, position, id) -> {
             //Get the name from the array that is in the same position as the chosen listitem.
             Intent intent = new Intent(view.getContext(), DocterChatActivity.class);
             intent.putExtra("docterUid", doctersAdaper.getItem(position).getUid());
+            intent.putExtra("currentUser", currentUser);
             startActivity(intent);
         });
     }

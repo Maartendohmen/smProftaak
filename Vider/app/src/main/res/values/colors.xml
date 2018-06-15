@@ -8,4 +8,5 @@
     <color name="standardBackground">#FAFAFA</color>
     <color name="colorChatReceiver">#595F9D</color>
     <color name="colorChatSender">#59C6E7</color>
+    <color name="colorChatBackground">#EBEBEB</color>
 </resources>

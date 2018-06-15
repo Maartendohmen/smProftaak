@@ -1,6 +1,8 @@
 package org.fhict.fontys.vider.Models;
 
-public class User  {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String uid;
     private String name;
     private Role role;
