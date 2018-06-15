@@ -38,7 +38,8 @@ public class HomePatientActivity extends AppCompatActivity {
         });
         imgMijnKlachtenInsturen.setOnClickListener(v -> {
             System.out.println("Mijn klachten insturen");
-            // TODO: add intent
+            Intent intent = new Intent(getBaseContext(), SendComplainActivity.class);
+            startActivity(intent);
         });
         imgChattenMetDokter.setOnClickListener(v -> {
             System.out.println("Chatten met dokter");
@@ -49,19 +50,16 @@ public class HomePatientActivity extends AppCompatActivity {
             System.out.println("Medicijnen bestellen");
             // TODO: add intent
         });
+
         imgInformatieOverKlachten.setOnClickListener(v -> {
             System.out.println("Informatie over kalchten");
-            // TODO: add intent
+            Intent intent = new Intent(getBaseContext(), InformationActivity.class);
+            startActivity(intent);
         });
 
 
-    }
 
-    public void chatWithDocter(View view){
-        Intent intent = new Intent(this, DocterListActivity.class);
-        startActivity(intent);
     }
-
     @Override
     public void onBackPressed(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
