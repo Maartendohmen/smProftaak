@@ -119,12 +119,12 @@
     <EditText
         android:id="@+id/editText5"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="68dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        android:text="Allereerst kan het een lipoom betreffen. Een lipoom is een goedaardig gezwel van vetweefselcellen. Deze gezwellen worden ook wel vetbulten genoemd. Deze gezwellen zitten onder de huid en worden tussen de 1 en 10 centimeter groot. Het zou goed mogelijk kunnen zijn dat deze zich op de hoofdhuid bevinden, ook al komt dit niet heel vaak voor. Een lipoom is totaal onschuldig. De gezwellen voelen zacht aan en je kunt ze zelfs bewegen. Het kan pijnlijk zijn wanneer ze tegen een zenuw aanliggen maar dit komt niet vaak voor."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -132,12 +132,12 @@
     <EditText
         android:id="@+id/editText8"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="78dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="Duis finibus egestas odio, sit amet dictum massa tempor in. Vestibulum tincidunt tristique velit nec aliquet. Suspendisse faucibus, est sed."
+        android:text="Voor een lipoom is vaak geen behandeling benodigd. Het verdwijnt vanzelf en levert geen klachten op tenzij het tegen een zenuw aanligt. Ook wanneer het groter is dan vier centimeter moet het verwijderd worden. In dit geval worden de lipomen chirurgisch verwijderd. Dit wordt gedaan door middel van een incisie, onder plaatselijke verdoving."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/editText2" />
